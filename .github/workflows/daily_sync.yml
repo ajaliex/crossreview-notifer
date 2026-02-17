@@ -1,0 +1,37 @@
+name: Daily Studying Sync
+
+on:
+  schedule:
+    # Runs at 19:00 UTC (4:00 AM JST) every day
+    - cron: '0 19 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Sync Script
+        env:
+          STUDYING_EMAIL: ${{ secrets.STUDYING_EMAIL }}
+          STUDYING_PASSWORD: ${{ secrets.STUDYING_PASSWORD }}
+          NOTION_KEY: ${{ secrets.NOTION_KEY }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+          # Optional: Set the specific review page URL if known
+          # STUDYING_REVIEW_URL: ${{ secrets.STUDYING_REVIEW_URL }}
+        run: node src/index.js
