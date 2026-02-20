@@ -157,7 +157,7 @@ async function main() {
         if (Object.keys(results).length > 0 && blockId) {
             console.log(`Updating Notion Block ID: ${blockId}...`);
 
-            const dateStr = new Date().toLocaleDateString('ja-JP');
+            const dateStr = new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
             let contentText = `${dateStr} の復習問題数:\n`;
             for (const [key, value] of Object.entries(results)) {
                 contentText += `- ${key}: ${value}問\n`;
