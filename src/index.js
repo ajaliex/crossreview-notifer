@@ -197,6 +197,33 @@ async function main() {
             console.log('No results to send or Block ID missing.');
         }
 
+        // 5. Send to Discord
+        const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
+        if (Object.keys(results).length > 0 && discordWebhookUrl) {
+            console.log('Sending notification to Discord...');
+            const dateStr = new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
+            let discordContent = `**${dateStr}**の復習問題数:\n`;
+            for (const [key, value] of Object.entries(results)) {
+                discordContent += `- ${key}: ${value}問\n`;
+            }
+
+            try {
+                const response = await fetch(discordWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: discordContent }),
+                });
+
+                if (response.ok) {
+                    console.log('Successfully sent message to Discord.');
+                } else {
+                    console.error(`Failed to send message to Discord. Status: ${response.status}`);
+                }
+            } catch (discordError) {
+                console.error('Error sending message to Discord:', discordError);
+            }
+        }
+
     } catch (error) {
         console.error('An error occurred:', error);
 

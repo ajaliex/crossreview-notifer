@@ -32,6 +32,7 @@ jobs:
           STUDYING_PASSWORD: ${{ secrets.STUDYING_PASSWORD }}
           NOTION_KEY: ${{ secrets.NOTION_KEY }}
           NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           # Optional: Set the specific review page URL if known
           # STUDYING_REVIEW_URL: ${{ secrets.STUDYING_REVIEW_URL }}
         run: node src/index.js

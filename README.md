@@ -36,6 +36,7 @@ This project automates the extraction of "Review Problem Counts" from Studying.j
     STUDYING_PASSWORD=your_password
     NOTION_KEY=secret_xxxxxxxxxxxxxxxxxxxxxxxx
     NOTION_DB_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
     # Optional: If the script can't find the review page automatically
     # STUDYING_REVIEW_URL=https://member.studying.jp/crossreview/
     ```
@@ -53,6 +54,7 @@ This project automates the extraction of "Review Problem Counts" from Studying.j
     -   `STUDYING_PASSWORD`
     -   `NOTION_KEY`
     -   `NOTION_DB_ID`
+    -   `DISCORD_WEBHOOK_URL`
     -   `STUDYING_REVIEW_URL` (Optional)
 4.  The workflow is configured to run automatically at **04:00 AM JST (19:00 UTC)** every day.
 5.  You can also manually trigger it from the "Actions" tab by selecting "Daily Studying Sync" -> "Run workflow".
